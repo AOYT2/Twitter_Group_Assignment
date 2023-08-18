@@ -1,0 +1,200 @@
+---
+title: "Final Report"
+author: "Tweets6 - Naramol Pipoppinyo, Risa Yamazaki, Thanh Dat Nguyen, Eran Kan Kohen and Abdukarim Omar"
+date: "2023-06-07"
+output:
+  bookdown::html_document2:
+    toc: yes
+    toc_float:
+      collapsed: no
+    number_sections: yes
+    theme: cosmo
+editor_options:
+  markdown:
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# **Introduction**
+
+With the rise of social media, many organizations have used these online
+platforms to establish a new communication channel with potential
+customers. Thanks to the bidirectional nature of these platforms, users
+of sites such as Twitter, Facebook, and Instagram are not not just
+passive consumers of content but can also actively express their
+thoughts and opinions on content that these organizations create. Some
+companies attempt to make use of this unique feature of social media by
+pursuing novel approaches to marketing in hopes of gaining a competitive
+advantage. One of these approaches to online marketing communication is
+brand anthropomorphism, where companies engage in human-like
+company-consumer communication and relationship building that goes
+beyond the traditional brand image. Since the emergence of the strategy,
+there are an increasing number of corporations across various industries
+that make the shift from traditional "objectified brands" that construct
+an autonomous brand image to brands with more anthropomorphic features
+to improve brand perception and build new connections with consumers.
+The study by Delgado-Ballester et al. (2019), investigated consumer's
+general sentiment for apparel brands in experimental form demonstrated
+that humanized clothing brands were more effective than objectified
+brands in fostering the positive brand perceptions and emotional
+connections with consumers, even though that the effectiveness is
+dependent on the question of whether consumers would prefer to see the
+specific brand acting like a human. Such effect of anthropomorphism of
+brands is also visible on the social media in the form of direct
+consumer engagement with the brand's official accounts. A supervised
+machine learning study revealed that consumers engage more with
+humanized content posted by companies and dialogic replies (Wu et al.,
+2023). However, the study used the count of Twitter activities (e.g.
+replies counts, retweets) as the metrics of engagement of consumers,
+while the online sentiments of consumers towards those anthropomorphized
+accounts remain unclear, which calls for deeper research of the contents
+of consumers responses.
+
+This study will expand upon the study conducted by Delgado-Ballester et
+al. (2019) by focusing on specifically the aviation industry. The
+aviation industry is a very particular industry since the main service
+they provide is one that people keep on purchasing even though 40% of
+the population is scared of flying (Schaaff, 2019). Therefore, they
+focus maintaining positive customer experience inside and outside of the
+aircraft. As an industry that provides customers services, customer
+engagement that leads to the growth in brand equity is significant
+(Foxall, 2019). Companies from this industry, therefore, constantly seek
+effective social marketing strategies and implement them to enhance
+brand visibility and reputations (Foxal, 2019). Since Delgado-Ballester
+et al. (2019) did not focus on any company from the aviation industry in
+their study regarding anthropomorphic social media presences, this study
+will aim to fill in that gap.The explored results delivered in this
+study is expected to add insights on the strategic brand positionings
+for aviation companies.
+
+To conduct a comprehensive analysis of the effects and implications
+associated with implementing an anthropomorphic social media strategy,
+it was essential to compare brands that exhibit similar Tweeting
+frequencies and share geographical similarities. Initially, Ryanair was
+selected as the anthropomorphic brand. With over 720 thousand followers
+and an organizationally verified [Twitter
+account](https://twitter.com/Ryanair?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor)
+the Irish company's social media presence has received high praise (Loh,
+2023). They are known for writing Tweets in a funny, rude, and overall
+human-like way (Schlappig, 2022). Besides Ryanair, the anthropomorphized
+group also included United Airlines, who similarly use their Twitter
+account to engage more in customer dialogue. An example Tweet can be
+found
+[here](https://twitter.com/united/status/1664296946880724993?s=20). For
+the comparison, we selected airline companies, which used their Twitter
+accounts in a more professional, objectified manner. This included
+Emirates, Qatar, United, Turkish Airlines and EasyJet. Thus, Ryanair and
+United will be compared with Emirates, Qatar, Turkish, and EasyJet.
+
+As a service industry, aviation companies must be successful with
+maintaining positive sentiments among customers by leveraging
+communication strategies, while not depriving trusts among consumers
+about the quality of service. This study will aim to see if either the
+sentiment or the quantity of interactions differ among the selected
+Twitter accounts.
+
+Therefore, we chose the companies to compare the consumer's online
+response and sentiments with a research question, "What is the effect of
+brand anthromorphism on social media engagement for aviation industry?"
+This research question would help the aviation industry to understand
+online consumer behavior and utilize it for their strategic positioning.
+
+The research question will be answered by addressing sub research
+questions as follows;
+
+-   How does brand anthropomorphism affect the number of likes,
+    re-tweets, replies on Twitter?
+
+-   How does brand anthropomorphism affect the sentiments of consumers
+    on Twitter?
+
+-   Does brand anthropomorphism have an interaction effect on the
+    sentiment and interaction metrics on Twitter?
+
+This study serves mostly as an exploratory study into the effects of
+brand anthropomorphism on the engagement metrics of the aviation
+industry, and does not attempt to assert causal relationships between
+these variables.
+
+# **Data Collection and Processing**
+
+```{r, child=here::here("sections", "Data Collection.Rmd")}
+```
+
+# **Data Analysis**
+
+```{r, child=here::here("sections", "Data Processing and Analysis.Rmd")}
+```
+
+# **Conclusions and Implications**
+
+```{r, child=here::here("sections", "Conclusions and Implications.Rmd")}
+```
+
+# **Limitations and Future Improvements**
+
+```{r, child=here::here("sections", "Limitations.Rmd")}
+```
+
+## **References**
+
+Abdullah, N. A., Nishioka, D., Tanaka, Y., & Murayama, Y. (2015). User's
+action and decision making of retweet messages towards reducing
+misinformation spread during disaster. *Journal of Information
+Processing*, *23*(1), 31--40. <https://doi.org/10.2197/ipsjjip.23.31>
+
+Azar, S., Machado, J. C., Vacas-De-Carvalho, L., & Mendes, A. M. (2016).
+Motivations to interact with brands on Facebook -- Towards a typology of
+consumer--brand interactions. *Journal of Brand Management, 23*(2),
+153--178. <https://doi.org/10.1057/bm.2016.3>
+
+Delgado-Ballester, E., Palazon, M., & Peláez, J. M. M. (2019).
+Anthropomorphized vs objectified brands: which brand version is more
+loved? *European Journal of Management and Business Economics, 29*(2),
+150--165. <https://doi.org/10.1108/ejmbe-04-2019-0063>
+
+Foxall, G. R. (2018). An economic psychology of the marketing firm. In
+A. Lewis (Ed.), *The Cambridge Handbook of Psychology and Economic
+Behaviour* (2nd ed., pp. 365--402). Cambridge University Press.
+<https://doi.org/10.1017/9781316676349.013>
+
+Hayes, A. F., & Montoya, A. K. (2017). A Tutorial on Testing,
+Visualizing, and Probing an Interaction Involving a Multicategorical
+Variable in Linear Regression Analysis. *Communication Methods and
+Measures, 11*(1), 1--30. <https://doi.org/10.1080/19312458.2016.1271116>
+
+Kim, T. K. (2015). T test as a parametric statistic. *Korean Journal of
+Anesthesiology*, *68*(6), 540.
+<https://doi.org/10.4097/kjae.2015.68.6.540>
+
+Loh, C. (2023, April 29). *Controversial yet entertaining: Examining
+ryanair's social media strategy*. Simple Flying.
+<https://simpleflying.com/ryanair-social-media-strategy/>
+
+Mochon, D., Johnson, K., Schwartz, J., & Ariely, D. (2017). What Are
+Likes Worth? A Facebook Page Field Experiment. *Journal of Marketing
+Research*, *54*(2), 306--317. <https://doi.org/10.1509/jmr.15.0409>
+
+Parilla-Ferrer, B.E., Fernandez, P.L., & Ballena, J.T. (2015). Automatic
+classification of disaster-related tweets. (2014, December 28).
+<https://www.semanticscholar.org/paper/Automatic-Classification-of-Disaster-Related-Tweets-Parilla-Ferrer-Fernandez/f82e985ad5abc2f6f219f9cd83c248ebd132e3e4>
+
+Schaaff, S. V. (2019, October 12). Lots of Americans have a fear of
+flying. There are ways to overcome the anxiety disorder. *Washington
+Post*.
+<https://www.washingtonpost.com/health/lots-of-americans-have-a-fear-of-flying-there-are-way-to-overcome-the-anxiety-disorder/2019/10/11/d4746d84-d338-11e9-86ac-0f250cc91758_story.html>
+
+Schlappig, B. (2022). *Ryanair's Hilarious, Rude, Savage Twitter Team*.
+One Mile at a Time.
+<https://onemileatatime.com/insights/ryanair-twitter/>
+
+Wermuth, N. (1989). Moderating effects of subgroups in linear models.
+*Biometrika, 76*(1), 81--92. <https://doi.org/10.1093/biomet/76.1.81>
+
+Wu, L., Dodoo, N. A., & Choi, C.-W. (2023). Brand anthropomorphism on
+Twitter: Communication strategies and consumer engagement. *Journal of
+Product & Brand Management*, *ahead-of-print*(ahead-of-print).
+<https://doi.org/10.1108/JPBM-12-2021-3787>

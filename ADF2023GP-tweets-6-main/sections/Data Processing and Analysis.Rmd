@@ -1,0 +1,134 @@
+---
+title: "Data Processing and Analysis"
+output: 
+    bookdown::html_document2:
+        toc: true
+        toc_float: 
+            collapsed: false
+        number_sections: true
+        code_folding: hide
+        theme: cerulean
+date: "2023-06-08"
+---
+
+```{r setup_analysis, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE, echo = FALSE}
+library(here)
+library(knitr)
+library(stringr)
+library(stargazer)
+library(magick)
+library(IRdisplay)
+```
+
+### Methodology
+
+The analyses to answer the research question were formed with visualizations and statistical tests. A t-test and a histogram would be utilized to find whether anthropomorphic Twitter accounts had significantly higher interaction metrics. This would be done with both non-scaled and scaled interaction scores. Moreover, another t-test was conducted to understand the relationship between sentiment of the replies and the publishing of anthropomorphic Tweets. The t-tests were chosen due to the simplicity and the efficiency of the tests when measuring two sets (Kim, 2015). The results of the t-test will show if the difference in the groups statically significant and illustrates a difference in the general population.
+
+Finally, the study investigates the relationship between the sentiment scores and interaction metrics. This examination was deepened by adding anthropomorphism as an interaction variable. Linear regression tests and line graphs enabled close inspection of the relationship between all selected variables. The linear regression analyses were chosen due to its ability to illustrate the effect of moderation within subgroups (Wermuth, 1989). Moreover, it has been proven that visualization of interaction effects using linear regression has been proven to make the results of analyses much easier to interpret (Hayes & Montoya, 2017).
+
+### Results
+
+Below, the results of the statistical tests, as well as the visualizations will be presented. The analyses and the generation of the visualizations can be found [here](https://github.com/Digital-Footprints/ADF2023GP-tweets-6/blob/main/data_analysis/analysis.R).
+
+```{r}
+results_csv <- read.csv(here("data_analysis","results.csv"))
+#Round numbers
+results_csv[, 2:4] <- round(results_csv[, 2:4], digits = 5)
+#p-values for readability
+results_csv$p_value <- ifelse(results_csv$p_value == 0.000000, "<0.000001", results_csv$p_value)
+#change name of columns
+colnames(results_csv)[1] <- "Metrics"
+colnames(results_csv)[2] <- "Group 0"
+colnames(results_csv)[3] <- "Group 1"
+colnames(results_csv)[4] <- "P-Value"
+#change variable names for readability
+results_csv$Metrics <- str_to_title(gsub("_", " ", results_csv$Metrics))
+```
+
+Initially, the results of the t-tests are imported. Afterwards, several steps were taken to make sure the results were easy to understand and readable. Initially, all of the numbers were rounded to take less space. Afterwards, the extremely low p-values were changed to illustrate that the probability of a statistical difference being by chance is less than one in a million. Finally, the names of the columns and the variables were changed for better presentation (see table 3).
+
+**Table 3**
+
+*Overview descriptive data*
+
+```{r, echo = FALSE}
+#Convert the DataFrame to a Markdown table
+markdown_table <- kable(results_csv, format = "markdown")
+
+#Print
+print(markdown_table)
+```
+
+In table 3, Group 0 refers to the non-anthropomorphic group whereas Group 1 refers to the anthropomorphic one. The table aims to show the average score each group received for the chosen metric and see if the t-test significant was statistically significant. As seen above, the anthropomorphic group performs better in all interaction metrics in a statistically significant degree. This is true for the true values as well as the scaled values, indicating that the follower counts do not play a role in this performance. However, the relationship between anthropomorphism and sentiment scores of the replies do not seem to be statically significant (p\>0.05). This indicates that, even though the means are different, the null hypothesis concerning the reply sentiments and anthropomorphism cannot be rejected. On the other hand, it is clear that anthropomorphism boosts interaction.
+
+These relationships are further elaborated on with the following visualizations:
+
+**Figure 1**
+
+```{r, echo=FALSE, out.width="80%", fig.cap="Metrics Barchart"}
+
+knitr::include_graphics(here("data_analysis","visualizations","metrics_barchart.png"))
+```
+
+The plot above shows the non-scaled metrics (see figure 1).
+
+**Figure 2**
+
+```{r, echo=FALSE, out.width="80%", fig.cap="Metrics Barchart Scaled"}
+
+knitr::include_graphics(here("data_analysis","visualizations","metrics_barchart_scaled.png"))
+```
+
+Figure 2 shows the scaled metrics. The similarity of both of the plots highlights the lack of difference follower counts make.
+
+Afterwards, the linear regression results were loaded.
+
+```{r include = FALSE,echo=FALSE}
+load(here("data_analysis","linear_models.RData"))
+```
+
+The results of all of the regressions are presented below, in the same order as the table above (see table 3).
+
+**Table 4**
+
+*Overview results of the regression across various Twitter metrics*
+
+```{r warning=FALSE,echo=FALSE}
+stargazer(model_rt,model_rp,model_lk,model_qt, type='text')
+```
+
+As seen above from table 4, similar to the t-test scores, the interaction metrics are higher for anthropomorphic accounts. Moreover, for likes and tweets, there is a statistically significant interaction effect between anthropomorphism and sentiment score. The combination of higher sentiment and anthropomorphism leads to lower likes and tweets, and vice versa.
+
+**Table 5**
+
+*Overview scaled results of the regression across various Twitter metrics*
+
+```{r warning=FALSE,echo=FALSE}
+stargazer(model_rt_scaled,model_rp_scaled,model_lk_scaled,model_qt_scaled, type='text')
+```
+
+The results for the scaled interaction metrics are exactly the same on a statistical significance level with the non-scaled values. This indicates that the follower counts do not play a role in any of the explored relationships (see table 5).
+
+Since there are 8 different analyses, there are 8 unique linear regression graphs. Since highlighting all would be quite repetitive, only the Retweet count non-scaled and like count scaled graphs will be shown. All of the visualizations can be found [here](https://github.com/Digital-Footprints/ADF2023GP-tweets-6/tree/main/data_analysis/visualizations).
+
+**Figure 3**
+
+```{r, echo=FALSE, out.width="80%", fig.cap="Retweets Linear Regression"}
+
+knitr::include_graphics(here("data_analysis","visualizations","model_rt.png"))
+```
+
+Figure 3 shows the relationship between anthropomorphism, sentiment of replies, and retweets. As can be clearly seen, there is quite a staggering interaction effect which shows that the relatively straight curve for non-anthropomorphic gains a negative slope for anthropomorphic accounts where a negative sentiment correlates with more retweets. It is important to state that the graph indicates that for high sentiment scores the Retweet count would be negative. This is due to the linear regression model following a straight correlation.
+
+**Figure 4**
+
+```{r, echo=FALSE, out.width="80%", fig.cap="Likes Scales Linear Regression"}
+
+knitr::include_graphics(here("data_analysis","visualizations","model_lk_scaled.png"))
+```
+
+The same interpretation for retweets can be made for the scaled like values. Again, a tweet with higher likes for an anthropomorphic correlates with replies with more negative sentiments (see figure 4).

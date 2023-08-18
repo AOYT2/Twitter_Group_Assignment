@@ -1,0 +1,170 @@
+---
+title: "Data Collection and Processing"
+output: 
+    bookdown::html_document2:
+        toc: true
+        toc_float: 
+            collapsed: false
+        number_sections: true
+        code_folding: hide
+        theme: cerulean
+---
+
+```{r setup_collection, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Data Collection
+
+In total, six different airlines were used for data collection including RyanAir, EasyJet, Emirates, Qatar, Turkish Airline, and United airlines. We used the 'users' end point to collect tweets from specific Twitter accounts by specifying the userID with this line of code (see table 1).
+
+```{r, echo = FALSE}
+
+file_name <- here::here("data_collection", "Aviation_collect_data.R") 
+knitr::read_chunk(path = file_name, labels = "user_end_point", from = 27, to = 30) 
+file_in_repo <- stringr::str_sub(file_name, start = stringr::str_locate(file_name, "/ADF2023-tweets-6")[1, "start"]) 
+```
+
+```{r, user_end_point, eval = FALSE, echo = FALSE}
+```
+
+**Table 1**
+
+*Overview airlines and their Twitter User ID*
+
+| Airline          | UserID     |
+|------------------|------------|
+| RyanAir          | 1542862735 |
+| EasyJet          | 38676903   |
+| Emirates         | 821045162  |
+| Qatar            | 14589119   |
+| Turkish Airlines | 18909186   |
+| United           | 260907612  |
+
+Our full parameters were as follows:
+
+```{r, echo = FALSE}
+
+file_name <- here::here("data_collection", "Aviation_collect_data.R") 
+knitr::read_chunk(path = file_name, labels = "params", from = 31, to = 36) 
+file_in_repo <- stringr::str_sub(file_name, start = stringr::str_locate(file_name, "/ADF2023-tweets-6")[1, "start"]) 
+```
+
+```{r, params, eval = FALSE, echo = TRUE}
+```
+
+Due to the API limitation of 10,000 tweets, we wanted to collect as much data and information as possible per request and thus, took a more exhaustive approach to data collection. Meaning that even when we did not think we wanted to use certain information, we made sure to specify all "tweet fields" and all "expansions" from the based on the file 'aux_objects.R':
+
+```{r, echo = FALSE}
+
+file_name <- here::here("aux_objects.R") 
+knitr::read_chunk(path = file_name, labels = "ALL_tweet_fields", from = 2, to = 18) 
+file_in_repo <- stringr::str_sub(file_name, start = stringr::str_locate(file_name, "/ADF2023-tweets-6")[1, "start"]) 
+```
+
+```{r, ALL_tweet_fields, eval = FALSE, echo = TRUE}
+```
+
+```{r, echo = FALSE}
+
+file_name <- here::here("aux_objects.R") 
+knitr::read_chunk(path = file_name, labels = "ALL_expansions", from = 43, to = 50) 
+file_in_repo <- stringr::str_sub(file_name, start = stringr::str_locate(file_name, "/ADF2023-tweets-6")[1, "start"]) 
+```
+
+```{r, ALL_expansions, eval = FALSE, echo = TRUE}
+```
+
+We first did many rounds of data sampling in which left us with approximately 6000 tweets for the official data collection. In total, between 499 - 500 tweets were specified per airline, leading to our "base" data to include 2996 tweets. These tweets will be referred to as "responses" for the rest of the research. We excluded replies in our parameters because during our testing, we found that most of the "reply" type of Tweets lacked any public metrics such as retweets, likes, shares and comments. The anthropomorphic brands also had an added advantage in regards to the engagement of their replies since many of the traditional airlines used their replies for customer support (which naturally receive little engagement), keeping the replies in could have therefore skewed results. We decided to set our max results to 50 meaning that to get to 500 tweets, we requested the API 10 times via a loop to reach 500.
+
+This code was replicated six times for all airlines using the httr package:
+
+```{r, echo = FALSE}
+
+file_name <- here::here("data_collection", "Aviation_collect_data.R") 
+knitr::read_chunk(path = file_name, labels = "full_loop", from = 37, to = 101) 
+file_in_repo <- stringr::str_sub(file_name, start = stringr::str_locate(file_name, "/ADF2023-tweets-6")[1, "start"]) 
+```
+
+```{r, full_loop, eval = FALSE, echo = TRUE}
+```
+
+As you can see in the code, within the loop, we do a second data request specifically using the recent search endpoint to collect specific replies from the tweets we collected in our outer loop:
+
+```{r, echo = FALSE}
+
+file_name <- here::here("data_collection", "Aviation_collect_data.R") 
+knitr::read_chunk(path = file_name, labels = "recent_point", from = 25, to = 27) 
+file_in_repo <- stringr::str_sub(file_name, start = stringr::str_locate(file_name, "/ADF2023-tweets-6")[1, "start"]) 
+```
+
+```{r, recent_point, eval = FALSE, echo = TRUE}
+```
+
+We did this by specifying the "conversation ID" in the query based on the "tweet_id" collected from the outer loop.
+
+```{r, echo = FALSE}
+
+file_name <- here::here("data_collection", "Aviation_collect_data.R") 
+knitr::read_chunk(path = file_name, labels = "recent_point_param", from = 68, to = 73) 
+file_in_repo <- stringr::str_sub(file_name, start = stringr::str_locate(file_name, "/ADF2023-tweets-6")[1, "start"]) 
+```
+
+```{r, recent_point_param, eval = FALSE, echo = TRUE}
+```
+
+We collected a maximum of 20 replies per tweet and so in theory we could get a max of 1000 replies based on the 50 tweets. Since we collect a total of 500 tweets per airline, this could lead to a theoretical maximum of 10,500 datapoints per airline. However, knowing that most tweets do not have many replies, we would not meet this criteria which would be above the 10000 cap of the API.
+
+### Raw Data Processing
+
+When working with the Twitter API using httr package, the response output is a JSON file. Therefore we had to process the data into a usable dataframe on R. The JSON response contains several key components: "meta", "includes", and "data". "Meta" was used in the loops to retrieve the "next_token" value for pagination. The "data" file includes the main data from the end point that was used for the API request. The "includes" contains additional data that may be related to the main data collection. Both the "data" and "includes" were extracted and processed into into separate lists called 'raw_tweets' and another one for the includes called 'raw_includes' in 'Aviation_process_data.R'. These were processed into 'df_tweets' and 'df_ref_tweets' respectively with these values specified:
+
+```{r, echo = FALSE}
+
+file_name <- here::here("data_collection", "Aviation_process_data.R") 
+knitr::read_chunk(path = file_name, labels = "df_tweets process", from = 87, to = 103) 
+file_in_repo <- stringr::str_sub(file_name, start = stringr::str_locate(file_name, "/ADF2023-tweets-6")[1, "start"]) 
+```
+
+```{r, df_tweets process, eval = FALSE, echo = TRUE}
+```
+
+```{r, echo = FALSE}
+
+file_name <- here::here("data_collection", "Aviation_process_data.R") 
+knitr::read_chunk(path = file_name, labels = "df_ref_tweets process", from = 104, to = 123) 
+file_in_repo <- stringr::str_sub(file_name, start = stringr::str_locate(file_name, "/ADF2023-tweets-6")[1, "start"]) 
+```
+
+```{r, df_ref_tweets process, eval = FALSE, echo = TRUE}
+```
+
+These two data sets are created for the "responses" and "replies" for each airline, meaning that each airline has four datasets. Using EasyJet as an example:
+
+1.  'df_ref_tweets_EJ' includes the reference tweets of the EasyJet 'responses',
+2.  'df_tweets_EJ' includes the tweets of the EasyJet 'responses',
+3.  'replies_df_ref_tweets_EJ' includes the reference tweets of the EasyJet 'replies',
+4.  'replies_df_tweets_EJ' includes the reference tweets of the EasyJet 'replies',
+
+Due to our exhaustive data collection approach, we received reference tweets from the expansions. However since we did not use it in our analysis, we will not go into more detail on this data for the rest of the research.
+
+These dataframes are created for all the airlines including EasyJet, including RyanAir, Emirates, Qatar, Turkish Airlines, and United Airlines. In the end, we received a total of 2996 responses and 1204 replies for all 6 airlines (see table 2). The small sample size is due to the fact that replies only go 7 days back from the day of data collection. To deal with the request time limit, we spaced the requests for every minute.
+
+**Table 2**
+
+*Number of Responses and Replies Collected per Airline*
+
+| Airline          | Responses | Replies |
+|------------------|-----------|---------|
+| RyanAir          | 499       | 200     |
+| EasyJet          | 500       | 135     |
+| Emirates         | 500       | 161     |
+| Qatar            | 499       | 348     |
+| Turkish Airlines | 499       | 217     |
+| United           | 499       | 143     |
+
+Initially, the aforementioned collected data was loaded into an empty R file. Each company had their own dataframe and in order to make the future analyses possible and easy, several new variables were added into the dataframes. The variable "ant_dummy" is a binary variable which indicates whether the company uses anthropomorphic Tweets. Ryanair and United Airlines received a score of 1, whereas the other companies received a 0. The "company" variable had the name of the company to make the analyses easier, and a column called "follower_count" was created to scale some results in the latter parts of the study. Each company received their follower counts as of 25th of May 2023. Once the modifications were done, the dataframes were merged into a complete dataframe.
+
+The processing continued with the creation of a new dataframe which only consisted of main Tweets, removing the replies - even though we excluded them in the previous steps, a small fraction of replies still managed to slip through. Later, new columns were created with the scaled version of each interaction metric. This was created by dividing the metric by the follower count. The analyses utilize both the scaled and non-scaled versions.
+
+Finally, the processing regarding the sentiment scores of the Tweets started with the removal of URL's and non-alphanumeric elements from the chosen Tweets. The sentiment scores were generated using the processed texts. The same process was done for the replies. However since replies are more complicated, additional filters were applied which ensured the texts were written in English and were not empty cells after the removal of non-alphanumeric elements. With the sentiment scores generated, the dataframes were ready for the analyses.

@@ -1,0 +1,90 @@
+---
+title: "Implications"
+author: "Risa Yamazaki"
+date: "2023-06-08"
+output: 
+    bookdown::html_document2:
+        toc: true
+        toc_float: 
+            collapsed: false
+        number_sections: true
+        code_folding: hide
+        theme: cerulean
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup_conclusion, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This study revealed that the chosen anthropomorphized Airline Twitter accounts are
+associated with more engagements measured in retweets, replies, likes
+and quotes by Twitter users. The effect was the most prominent for the
+number of likes. Mochon (2017), studied the social media platform 
+Facebook and concluded that the number of likes were associated with the positive
+offline attitudes of consumers towards the companies, especially
+prominent when the company account has an objective of promotional
+communications with consumers. As a social media platform with similar
+features, the larger number of likes for anthropomorphic companies'
+tweets possibly reflect its association to positive offline perceptions
+among consumers.
+
+The count of retweets is another Twitter engagement metrics that was an
+indicator of interaction levels for aviation companies. According to a
+research by [Parilla-Ferrer et al
+(2015),
+tweets that are deemed to be informative got more retweeted by users.
+Another study by Abdullah et al.(2015) added that the tweets typically retweeted by users are typically
+perceived by the users to be important and interesting. Additionally,
+the actions of retweets could be attributed to the tweet users. Provided
+those supporting studies, the result can be explained that the
+human-like tweets and Twitter accounts of the companies in aviation
+industries are more likely to be perceived by consumers as more
+interesting and important, and it is able to motivate consumers to share
+the contents among their communities.
+
+However, this study used the anthropomorphic companies which are
+associated with lower quality products and services. Therefore, as
+Delgado-Ballester (2019) concluded in their research, it is plausible to conclude here that the
+effect of the human-like Tweet behaviors are preferred by consumers, at
+least for the cases of companies that has the initially aligned brand
+image to such behaviours. To sum up, anthropomorphism is an effective
+differentiation strategy for aviation companies to stimulate Twitter
+users to respond to the companies' tweets and to activate two-ways
+interactions with consumers by emphasizing the company's brand images.
+
+This study extended the literature of previous studies by investigating
+the effects of anthropomorphic style of tweeting on the consumer
+sentiments towards the aviation firms. This was achieved by assessing
+the sentiment scores of replies by Twitter users to the Aviation
+companies' tweets. Unfortunately, the effects observed between the two
+factors were not statistically significant. Therefore it was not
+possible in this study to determine whether anthropomorphic tweets by
+companies would be beneficial or detrimental for consumers' actual brand
+perceptions and attitudes towards the brands.
+
+However, the negative interactions between the sentiment scores of the
+consumers' replies and the counts of likes and retweets were
+statistically significant for anthropomorphic aviation companies Twitter
+accounts, regardless of the number of followers of the account. The
+results provides a surprising, but contextually expected insight.
+Primarily by Ryanair, anthropomorphic Twitter accounts behave beyond a
+formal corporate-like attitudes by using sarcastic and dark jokes as
+content. The replies to those tweets are also absurd, dark and sarcastic
+towards the companies' services but as jokes. Therefore, the negative
+associations actually connotes the positive friend-like relationship
+building between the anthropomorphic aviation companies and Twitter
+users. This suggests that the aviation companies which intends to build
+close communications and communities with their potential consumers
+could benefit from the anthropomorphic style of tweets.
+
+To conclude, this study discovered, through statistical analyses, that
+anthropomorphic tweets could be an effective social media tool for
+aviation companies when trying to build an easily accessible impression.
+This correlates with higher social media presence and greater
+interaction. The insights provided serve as a stepping stone for future
+researches to further investigate the effects of anthropomorphic
+behavior on the companies' actual reputations on their services and on
+the consumers' purchase intentions.

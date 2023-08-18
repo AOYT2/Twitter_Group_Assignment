@@ -1,0 +1,19 @@
+---
+title: "Limitations and future improvements"
+author: "Abdukarim Omar"
+date: "2023-06-06"
+output: 
+    bookdown::html_document2:
+        toc: true
+        toc_float: 
+            collapsed: false
+        number_sections: true
+        code_folding: hide
+        theme: cerulean
+---
+
+The study suffered from several limitations due to the Twitter API. Therefore, if future studies want to develop upon the discussed implications, there are some factors to consider. The first factor regards to the limitations of obtaining tweets. Twitter maintains a quota system for requesting Tweets through their API. Apart from their free plan, the cheapest plan one is allowed to request 10.000 tweets, if one exceeds the limitations, they must purchase an additional plan to continue collecting data. This caused the scope of this study to be limited to only having six brands observed, from which two brands were anthropomorphic. This could result in that results are skewed. Although this study aimed to explore the concept of anthropomorphism within consumer engagement, we recommend future studies to include more aviation brands and in addition, to create subgroups based on consumer segments. For example, Ryanair is a budget airline and as such will attract a different base than Emirates which caters to consumers that prefer a more premium experience. By having more brands, it is possible to see how anthropomorphism is deployed within the various aviation market segments.
+
+The second limitation regards the limited time window Twitter allows to collect certain tweet types. One of the variables used in this study was sentiment, this was created by observing the replies of users under a brand's tweet. Twitter maintains a 7-day window for how far a user can request to collect replies under a tweet. This limitation caused that the study were only able to request all the replies of tweets under a post that was posted within that 7-day window. Consequently, this creates a small sample size and sample bias making the model more prone to outliers. Outliers can impact how positive or negative comments are on average for a particular tweet, as well as the quantity of comments on a post. If the 7-day limitation did not exist, the issue of outliers would be suppressed as there are more datapoints to observe the trajectory of consumer sentiment. In addition, it provides the opportunity to see if trends are visible regarding in the number of likes, comments, and retweets a brand receives that deploy anthropomorphism versus brands that do not use it.
+
+The last limitation regards the lack of access to demographic data of users that interact with the brands. Literature has shown that different consumer bases interact with a brand differently (Azar et al., 2016). As such, it is interesting to observe which type of consumers (based on demographic data such as age, gender, and country of origin), are more likely to interact with brands that use anthropomorphism in their communication. For this study, it was not decided to observe this sub-question and rather observe the general Twitter population, as this data is not provided by Twitter's API to third parties as it contains sensitive user information. Data privacy regulations such as GDPR restrict how much data can be processed by third-party actors.
